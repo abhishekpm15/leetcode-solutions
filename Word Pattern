@@ -1,0 +1,48 @@
+Given a pattern and a string s, find if s follows the same pattern.
+Here follow means a full match, such that there is a bijection between a letter in pattern and a non-empty word in s.
+
+Input: pattern = "abba", s = "dog cat cat dog"
+Output: true
+
+Input: pattern = "abba", s = "dog cat cat fish"
+Output: false
+
+Input: pattern = "aaaa", s = "dog cat cat dog"
+Output: false
+
+CODE:
+
+class Solution {
+public:
+    bool wordPattern(string pattern, string s) {
+        map<char,string> mp;
+        int count=0;
+        string t;
+        vector<string> vec;
+        stringstream ss(s);
+        int i=0;
+        while(getline(ss,t,' ')){
+            count++;
+            if(mp.find(pattern[i])==mp.end()){
+                if(find(vec.begin(),vec.end(),t)==vec.end()){
+                    mp.insert({pattern[i],t});
+                    vec.push_back(t);
+                }
+                else{
+                    return 0;
+                }
+            }
+            else{
+                if(mp[pattern[i]]!=t){
+                    return 0;
+                }
+            }
+            i++;
+        }
+        if(count!=pattern.length()){
+            return 0;
+        }
+        return 1;
+
+    }
+};
