@@ -1,0 +1,25 @@
+You are given the heads of two sorted linked lists list1 and list2.
+Merge the two lists into one sorted list. The list should be made by splicing together the nodes of the first two lists.
+Return the head of the merged linked list.
+
+Code:
+
+ListNode* mergeTwoLists(ListNode* head, ListNode* head2){
+    if(head == nullptr){
+        return head2;
+    }
+    if(head2 == nullptr){
+        return head;
+    }
+    ListNode* head3 = nullptr;
+    head3 = new ListNode;
+    if(head->val <= head2->val){
+        head3->val = head->val;
+        head3->next = mergeTwoLists(head->next,head2);
+    }
+    else{
+        head3->val = head2->val;
+        head3->next = mergeTwoLists(head,head2->next);
+    }
+    return head3;
+ } 
